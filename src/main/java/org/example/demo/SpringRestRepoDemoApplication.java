@@ -27,33 +27,4 @@ public class SpringRestRepoDemoApplication {
 			log.info("Swagger UI: http://localhost:8080/swagger-ui.html ");
 		};
 	}
-
-	@Bean
-	CommandLineRunner initDatabaseWithPeople(PersonRepository repository) {
-		return args -> {
-			log.info("Preloading " + repository.save(new Person( "Bilbo", "Baggins")));
-			log.info("Preloading " + repository.save(new Person("Frodo", "Baggins")));
-		};
-	}
-
-	@Bean
-	CommandLineRunner initDatabaseWithLinks(LinkRepository repository) {
-		return args -> {
-			log.info("Preloading " + repository.save(new Link("1", "https://www.google.com/search?q=1")));
-			log.info("Preloading " + repository.save(new Link("2", "https://www.google.com/search?q=2")));
-			log.info("Preloading " + repository.save(new Link("3", "https://www.google.com/search?q=3")));
-			log.info("Preloading " + repository.save(new Link("4", "https://www.google.com/search?q=4")));
-			log.info("Preloading " + repository.save(new Link("5", "https://www.google.com/search?q=5")));
-		};
-	}
-
-	@Bean
-	public RepositoryRestConfigurer personRepositoryRestConfigurer() {
-		return RepositoryRestConfigurer.withConfig(config -> config.exposeIdsFor(Person.class));
-	}
-
-	@Bean
-	public RepositoryRestConfigurer linkRepositoryRestConfigurer() {
-		return RepositoryRestConfigurer.withConfig(config -> config.exposeIdsFor(Link.class));
-	}
 }
